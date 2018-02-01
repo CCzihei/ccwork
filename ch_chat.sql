@@ -1,107 +1,127 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50617
-Source Host           : 127.0.0.1:3306
+Source Server         : wamp3.1
+Source Server Version : 50719
+Source Host           : localhost:3306
 Source Database       : ch_chat
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-02-26 02:09:53
+Date: 2018-02-02 02:42:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for ch_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `ch_admin`;
+CREATE TABLE `ch_admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '管理员名称',
+  `password` char(35) NOT NULL DEFAULT '' COMMENT '密码',
+  `operator` varchar(50) NOT NULL DEFAULT '' COMMENT '操作人',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后修改时间',
+  PRIMARY KEY (`admin_id`),
+  UNIQUE KEY `uni_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ch_admin
+-- ----------------------------
+INSERT INTO `ch_admin` VALUES ('1', 'admin', 'bde3c7679b99822a4a6f52a553b79125|B@', '陈作海', '0', '0');
 
 -- ----------------------------
 -- Table structure for ch_collect
 -- ----------------------------
 DROP TABLE IF EXISTS `ch_collect`;
 CREATE TABLE `ch_collect` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `moodID` int(11) NOT NULL DEFAULT '0',
-  `createtime` int(1) DEFAULT '0',
-  `display` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `collect_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `mood_id` int(11) NOT NULL DEFAULT '0' COMMENT '动态ID',
+  `display` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否展示1：是0：否',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`collect_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ch_collect
 -- ----------------------------
-INSERT INTO `ch_collect` VALUES ('1', '11', '3', '1486463717', '0');
-INSERT INTO `ch_collect` VALUES ('2', '11', '3', '1486463720', '0');
-INSERT INTO `ch_collect` VALUES ('3', '11', '3', '1486463809', '0');
-INSERT INTO `ch_collect` VALUES ('4', '11', '3', '1486463863', '0');
-INSERT INTO `ch_collect` VALUES ('5', '11', '3', '1486463888', '0');
-INSERT INTO `ch_collect` VALUES ('6', '11', '3', '1486464015', '0');
-INSERT INTO `ch_collect` VALUES ('7', '11', '4', '1486464201', '0');
-INSERT INTO `ch_collect` VALUES ('8', '11', '4', '1486646979', '1');
-INSERT INTO `ch_collect` VALUES ('9', '11', '3', '1486646981', '1');
+INSERT INTO `ch_collect` VALUES ('1', '11', '3', '0', '1486463717');
+INSERT INTO `ch_collect` VALUES ('2', '11', '3', '0', '1486463720');
+INSERT INTO `ch_collect` VALUES ('3', '11', '3', '0', '1486463809');
+INSERT INTO `ch_collect` VALUES ('4', '11', '3', '0', '1486463863');
+INSERT INTO `ch_collect` VALUES ('5', '11', '3', '0', '1486463888');
+INSERT INTO `ch_collect` VALUES ('6', '11', '3', '0', '1486464015');
+INSERT INTO `ch_collect` VALUES ('7', '11', '4', '0', '1486464201');
+INSERT INTO `ch_collect` VALUES ('8', '11', '4', '1', '1486646979');
+INSERT INTO `ch_collect` VALUES ('9', '11', '3', '1', '1486646981');
 
 -- ----------------------------
 -- Table structure for ch_comment
 -- ----------------------------
 DROP TABLE IF EXISTS `ch_comment`;
 CREATE TABLE `ch_comment` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `moodID` int(11) NOT NULL DEFAULT '0',
-  `content` text NOT NULL,
-  `createtime` int(11) DEFAULT '0',
-  `display` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `mood_id` int(11) NOT NULL DEFAULT '0' COMMENT '动态ID',
+  `content` varchar(500) NOT NULL DEFAULT '' COMMENT '评论内容',
+  `display` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否展示1：是0：否',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`comment_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ch_comment
 -- ----------------------------
-INSERT INTO `ch_comment` VALUES ('1', '11', '3', '那你很棒哦', '1484720835', '0');
-INSERT INTO `ch_comment` VALUES ('3', '11', '3', '哦哦哦', '1486647755', '0');
-INSERT INTO `ch_comment` VALUES ('4', '11', '4', '你好啊', '1486647762', '0');
+INSERT INTO `ch_comment` VALUES ('1', '11', '3', '那你很棒哦', '0', '1484720835');
+INSERT INTO `ch_comment` VALUES ('3', '11', '3', '哦哦哦', '0', '1486647755');
+INSERT INTO `ch_comment` VALUES ('4', '11', '4', '你好啊', '0', '1486647762');
 
 -- ----------------------------
 -- Table structure for ch_favorite
 -- ----------------------------
 DROP TABLE IF EXISTS `ch_favorite`;
 CREATE TABLE `ch_favorite` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `moodID` int(11) NOT NULL DEFAULT '0',
-  `createtime` int(1) DEFAULT '0',
-  `display` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `favorite_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `mood_id` int(11) NOT NULL DEFAULT '0' COMMENT '动态id',
+  `display` tinyint(1) DEFAULT '1' COMMENT '是否展示1：是0：否',
+  `create_time` int(11) DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`favorite_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ch_favorite
 -- ----------------------------
-INSERT INTO `ch_favorite` VALUES ('12', '11', '4', '1486653175', '0');
-INSERT INTO `ch_favorite` VALUES ('13', '11', '5', '1487995516', '0');
-INSERT INTO `ch_favorite` VALUES ('3', '11', '1', '1484742614', '0');
-INSERT INTO `ch_favorite` VALUES ('4', '11', '1', '1484742619', '0');
-INSERT INTO `ch_favorite` VALUES ('5', '11', '1', '1484742621', '0');
-INSERT INTO `ch_favorite` VALUES ('6', '11', '1', '1484742630', '0');
-INSERT INTO `ch_favorite` VALUES ('7', '11', '2', '1484743145', '1');
-INSERT INTO `ch_favorite` VALUES ('8', '11', '1', '1484743159', '1');
-INSERT INTO `ch_favorite` VALUES ('9', '11', '3', '1486401662', '0');
-INSERT INTO `ch_favorite` VALUES ('10', '11', '4', '1486401664', '0');
-INSERT INTO `ch_favorite` VALUES ('11', '11', '3', '1486463069', '0');
-INSERT INTO `ch_favorite` VALUES ('14', '11', '4', '1488039014', '1');
+INSERT INTO `ch_favorite` VALUES ('12', '11', '4', '0', '1486653175');
+INSERT INTO `ch_favorite` VALUES ('13', '11', '5', '0', '1487995516');
+INSERT INTO `ch_favorite` VALUES ('3', '11', '1', '0', '1484742614');
+INSERT INTO `ch_favorite` VALUES ('4', '11', '1', '0', '1484742619');
+INSERT INTO `ch_favorite` VALUES ('5', '11', '1', '0', '1484742621');
+INSERT INTO `ch_favorite` VALUES ('6', '11', '1', '0', '1484742630');
+INSERT INTO `ch_favorite` VALUES ('7', '11', '2', '1', '1484743145');
+INSERT INTO `ch_favorite` VALUES ('8', '11', '1', '1', '1484743159');
+INSERT INTO `ch_favorite` VALUES ('9', '11', '3', '0', '1486401662');
+INSERT INTO `ch_favorite` VALUES ('10', '11', '4', '0', '1486401664');
+INSERT INTO `ch_favorite` VALUES ('11', '11', '3', '0', '1486463069');
+INSERT INTO `ch_favorite` VALUES ('14', '11', '4', '1', '1488039014');
 
 -- ----------------------------
 -- Table structure for ch_friend
 -- ----------------------------
 DROP TABLE IF EXISTS `ch_friend`;
 CREATE TABLE `ch_friend` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL DEFAULT '0',
-  `fid` int(10) unsigned NOT NULL DEFAULT '0',
-  `status` tinyint(4) DEFAULT '1',
-  `createtime` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `friend_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `friend_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '好友用户id',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`friend_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -120,19 +140,20 @@ INSERT INTO `ch_friend` VALUES ('46', '11', '12', '2', '0');
 -- ----------------------------
 DROP TABLE IF EXISTS `ch_link`;
 CREATE TABLE `ch_link` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `createtime` int(1) DEFAULT '0',
-  `display` tinyint(4) DEFAULT '0',
-  `link` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '地址名称',
+  `status` tinyint(4) DEFAULT '0' COMMENT '状态1：可使用0：不可使用',
+  `link` varchar(1000) DEFAULT '' COMMENT '链接地址',
+  `create_time` int(11) DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(11) DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`link_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ch_link
 -- ----------------------------
-INSERT INTO `ch_link` VALUES ('6', 'TP官网', '1486481314', '1', 'http://www.thinkphp.cn/');
-INSERT INTO `ch_link` VALUES ('5', '百度一下', '1486479913', '1', 'http://www.baidu.com');
+INSERT INTO `ch_link` VALUES ('6', 'TP官网', '1', 'http://www.thinkphp.cn/', '1486481314', null);
+INSERT INTO `ch_link` VALUES ('5', '百度一下', '1', 'http://www.baidu.com', '1486479913', null);
 
 -- ----------------------------
 -- Table structure for ch_mood
@@ -161,50 +182,54 @@ INSERT INTO `ch_mood` VALUES ('7', '23', '事实上', '1486708381', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `ch_sysinfo`;
 CREATE TABLE `ch_sysinfo` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT '',
-  `createtime` int(1) DEFAULT '0',
-  `logo` varchar(255) DEFAULT '',
-  `display` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `sysinfo_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '配置键',
+  `value` varchar(255) NOT NULL DEFAULT '' COMMENT '配置值',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后修改时间',
+  PRIMARY KEY (`sysinfo_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ch_sysinfo
 -- ----------------------------
-INSERT INTO `ch_sysinfo` VALUES ('1', '龙岩学院交流社区', '1486792614', '2017-02-11/589ebd4dca9e5.jpg', '1');
+INSERT INTO `ch_sysinfo` VALUES ('1', 'name', 'Vchat', '0', '0');
+INSERT INTO `ch_sysinfo` VALUES ('3', 'logo', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for ch_user
 -- ----------------------------
 DROP TABLE IF EXISTS `ch_user`;
 CREATE TABLE `ch_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) DEFAULT NULL,
-  `password` char(32) NOT NULL,
-  `sex` enum('2','1','0') NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '姓名',
+  `password` char(35) NOT NULL COMMENT '密码',
+  `sex` tinyint(4) NOT NULL DEFAULT '0' COMMENT '性别',
   `age` int(10) unsigned NOT NULL DEFAULT '0',
-  `icon` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '1',
-  `identity` tinyint(4) DEFAULT '1' COMMENT '1学生2老师',
-  `department` varchar(20) NOT NULL DEFAULT '信息工程学院',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+  `icon` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态',
+  `identity` tinyint(4) NOT NULL DEFAULT '1' COMMENT '身份1学生2老师',
+  `department` varchar(20) NOT NULL DEFAULT '信息工程学院' COMMENT '院系',
+  `operator` varchar(50) NOT NULL DEFAULT '' COMMENT '操作人',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后修改时间',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ch_user
 -- ----------------------------
-INSERT INTO `ch_user` VALUES ('1', 'admin', '4297f44b13955235245b2497399d7a93', '2', '0', null, '3', '1', '化学与材料学院');
-INSERT INTO `ch_user` VALUES ('11', 'user', '4297f44b13955235245b2497399d7a93', '1', '6', '2017-02-11/589eb7ec718f8.gif', '1', '1', '文学与传媒学院');
-INSERT INTO `ch_user` VALUES ('12', 'first', 'e10adc3949ba59abbe56e057f20f883e', '1', '16', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('13', '管理员', 'e10adc3949ba59abbe56e057f20f883e', '1', '19', null, '2', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('15', '第二个', 'e10adc3949ba59abbe56e057f20f883e', '1', '12', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('16', '第三个', 'e10adc3949ba59abbe56e057f20f883e', '1', '13', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('17', '第四个', 'e10adc3949ba59abbe56e057f20f883e', '1', '0', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('18', '第五个', 'e10adc3949ba59abbe56e057f20f883e', '2', '0', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('19', '第六个', 'e10adc3949ba59abbe56e057f20f883e', '1', '19', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('20', '第七个', 'e10adc3949ba59abbe56e057f20f883e', '1', '0', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('21', '第八个', 'e10adc3949ba59abbe56e057f20f883e', '1', '0', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('22', '瞅你咋滴', 'e10adc3949ba59abbe56e057f20f883e', '1', '13', null, '1', '1', '信息工程学院');
-INSERT INTO `ch_user` VALUES ('23', 'boom', 'e10adc3949ba59abbe56e057f20f883e', '2', '0', null, '1', '1', '信息工程学院');
+INSERT INTO `ch_user` VALUES ('1', 'admin', '4297f44b13955235245b2497399d7a93', '1', '0', '1', '3', '1', '化学与材料学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('11', 'user', '4297f44b13955235245b2497399d7a93', '2', '6', '1', '1', '1', '文学与传媒学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('12', 'first', 'e10adc3949ba59abbe56e057f20f883e', '2', '16', '1', '0', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('13', '管理员', 'e10adc3949ba59abbe56e057f20f883e', '2', '19', '1', '2', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('15', '第二个', 'e10adc3949ba59abbe56e057f20f883e', '2', '12', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('16', '第三个', 'e10adc3949ba59abbe56e057f20f883e', '2', '13', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('17', '第四个', 'e10adc3949ba59abbe56e057f20f883e', '2', '0', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('18', '第五个', 'e10adc3949ba59abbe56e057f20f883e', '1', '0', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('19', '第六个', 'e10adc3949ba59abbe56e057f20f883e', '2', '19', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('20', '第七个', 'e10adc3949ba59abbe56e057f20f883e', '2', '0', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('21', '第八个', 'e10adc3949ba59abbe56e057f20f883e', '2', '0', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('22', '瞅你咋滴', 'e10adc3949ba59abbe56e057f20f883e', '2', '13', '1', '1', '1', '信息工程学院', '', '0', '0');
+INSERT INTO `ch_user` VALUES ('23', 'boom', 'e10adc3949ba59abbe56e057f20f883e', '1', '0', '1', '1', '1', '信息工程学院', '', '0', '0');
