@@ -1,0 +1,64 @@
+<div class="">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">我的资料</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal register-form mt20"  role="form" method="post" action="<{:url('User/Edit')}>">
+                <div class="form-group">
+                    <label for="username" class="col-sm-3 control-label">用户名</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="username" value="<{$info.username}>"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-3 control-label ">性别</label>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio2" value="1"
+                            <if condition="$info.sex eq '1'">checked
+                            </if>
+                            > 男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio3" value="2" <if condition="$info.sex eq '2'">checked
+                        </if>> 女
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-3 control-label ">年龄</label>
+                    <div class="col-sm-4" style="max-height: 40px">
+                        <select name="age" id="age" class="form-control" style="max-height: 40px;">
+                            <?php
+                                for($i = 0; $i<120;$i++){
+                                    if($info['age']==$i){
+                                        echo '<option selected value='.$i.'>'.$i.'</option>';
+                                    }else{
+                                        echo '<option value='.$i.'>'.$i.'</option>';
+                                    }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-3 control-label ">院系</label>
+                    <div class="col-sm-4" style="max-height: 40px">
+                        <select name="department"  class="form-control" style="max-height: 40px;">
+                            <volist name="department" id="v">
+                                <option <if condition="$info.department eq $v"> selected </if> value="<{$v}>"><{$v}></option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-4">
+                        <button type="submit" class="btn btn-default" style="width: 100%">修改</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

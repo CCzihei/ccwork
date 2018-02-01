@@ -1,0 +1,70 @@
+<extend name="Layout/layout" />
+<block name="include">
+    <style>
+        .left{
+            background: #ddf0ed;
+            min-height: 400px;
+            margin: 0px 20px;
+            padding: 0px 15px;
+        }
+        .left ul{
+            padding-left: 20px;
+            padding-top: 10px;
+            border-bottom: 1px solid #fff;
+        }
+    </style>
+</block>
+
+<block name="nav">
+
+</block>
+
+<block name="body">
+    <div class="row body mt20">
+        <div class="col-sm-3 left">
+            <ul class="">
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'info'))}>">我的资料</a></li>
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'icon'))}>">我的头像</a></li>
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'password'))}>">修改密码</a></li>
+
+            </ul>
+            <ul class="">
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'mymood'))}>">我的动态</a></li>
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'collect'))}>">我的收藏</a></li>
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'favorite'))}>">我的点赞</a></li>
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'friendlist'))}>">好友列表</a></li>
+                <li class=""><a href="<{:url('Center/Index',array('active'=>'addfriend'))}>">好友申请</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-8">
+            <switch name="right">
+                <case value="info"><include file="Center/info" /></case>
+                <case value="password"><include file="Center/password" /></case>
+                <case value="mymood"><include file="Center/mymood" /></case>
+                <case value="addfriend"><include file="Center/addfriend" /></case>
+                <case value="collect"><include file="Center/collect" /></case>
+                <case value="icon"><include file="Center/icon" /></case>
+                <case value="favorite"><include file="Center/favorite" /></case>
+                <case value="friendlist"><include file="Center/friendlist" /></case>
+                <default /><include file="Center/info" />
+            </switch>
+
+        </div>
+    </div>
+
+    <block name="script">
+        <script>
+            var uid = <{$_SESSION['home']['userInfo']['id']}> ;
+            $('.uid').html(uid);
+            // 连接服务端
+            var socket = io('http://'+document.domain+':2120');
+            // 连接后登录
+            socket.on('connect', function(){
+                socket.emit('login', uid);
+            });
+            socket.on('new_msg', function(from,msg){
+                $('#content-show').append("<div><span class='msg-left msg'><{$friend['username']}>:"+msg+"</span><div class='clear'></div></div>");
+            });
+        </script>
+    </block>
+</block>

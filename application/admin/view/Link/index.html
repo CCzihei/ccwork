@@ -1,0 +1,51 @@
+<extend name="Index/index" />
+
+<block name="include">
+    <script src="ADMIN_URL/js/pintuer.js"></script>
+</block>
+
+<block name="main">
+    
+    <div >
+        <table class="table table-hover text-center">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>链接名</th>
+                <th>链接</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach  name='data' item='vo' key="k" >
+            <tr class="active">
+                <th scope="row"><{$k+1}></th>
+                <td><{$vo.name}></td>
+                <td><{$vo.link}></td>
+                <td><{$vo.createtime|date="Y/m/d",###}></td>
+                <td>
+
+                    <if condition="$vo.display eq 1">
+                        <a href="#" id="sex-a">显示</a>
+                        <else />   <a href="#" id="sex-a">隐藏</a>
+                    </if>
+
+                </td>
+                <td>
+                    <div class="button-group">
+                        <a href ="<{:url('Link/EditLink',array('id'=>$vo['id']))}>" class="button border-main">
+                        <span class="icon-edit"></span> 编辑</a>  
+                        <a href ="<{:url('Link/DeleteLink',array('id'=>$vo['id']))}>" class="button border-red"> <span class="icon-trash-o"></span>删除</a>
+                    </div>
+                </td>
+            </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <{$page}>
+    </div>
+
+
+</block>

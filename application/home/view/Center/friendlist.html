@@ -1,0 +1,28 @@
+<style>
+    .flist{
+        padding-left: 100px;
+        padding-right: 400px;
+    }
+</style>
+<div class="">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">我的好友</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <empty name="friendlist">
+                    <center>您还没有添加好友！！</center>
+                    <else />
+                    <volist name="friendlist" id="vo">
+                        <li class="flist">
+                            &nbsp;&nbsp;<{$vo.username}>&nbsp;&nbsp;<a href="<{:url('Friend/DeleteFriend',array('fid'=>$vo['fid']))}>" class=" fr btn btn-default">解除好友关系</a>
+                        </li>
+                    </volist>
+
+                </empty>
+            </ul>
+            <{$page}>
+        </div>
+    </div>
+</div>

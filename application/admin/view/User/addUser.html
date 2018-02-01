@@ -1,0 +1,110 @@
+<extend name="Index/index" />
+
+<block name="include">
+<script src="ADMIN_URL/js/pintuer.js"></script>
+</block>
+
+<block name="main">
+    <div class="panel admin-panel margin-top" id="add">
+      <div class="panel-head"><strong><span class="icon-pencil-square-o"></span> 增加用户</strong></div>
+      <div class="body-content">
+        <form method="post" class="form-x" action="<{:url('User/AddUser')}>">
+          <div class="form-group">
+            <div class="label">
+              <label>用户名：</label>
+            </div>
+            <div class="field">
+              <input type="text" class="input w50" value="" name="username" data-validate="required:请输入用户名" />
+              <div class="tips"></div>
+            </div>
+          </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>密码：</label>
+                </div>
+                <div class="field">
+                    <input type="password" class="input w50" value="" name="password" data-validate="required:请输入密码" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>确认密码：</label>
+                </div>
+                <div class="field">
+                    <input type="password" class="input w50" value="" name="repassword" data-validate="required:请确认密码" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>性别：</label>
+                </div>
+                <div class="field">
+                    <div class="button-group radio">
+
+                        <label class="button active">
+                            <span class="icon icon-check"></span>             
+                            <input name="sex" value="1" type="radio" checked="checked">男
+                        </label>             
+                    
+                        <label class="button "><span class="icon icon-check"></span>            
+                            <input name="sex" value="2" type="radio">女
+                        </label>         
+                    </div>       
+                </div>
+             </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>身份：</label>
+                </div>
+                <div class="field">
+                    <div class="button-group radio">
+                        <label class="button active">
+                            <span class="icon icon-check"></span>
+                            <input name="status" value="1" type="radio" checked="checked">普通用户
+                        </label>
+                        <label class="button">
+                            <span class="icon icon-check"></span>
+                            <input name="status" value="2" type="radio" checked="checked">管理员
+                        </label>
+
+                        <label class="button "><span class="icon icon-check"></span>
+                            <input name="status" value="3" type="radio">超级管理员
+                        </label>
+                    </div>
+                </div>
+            </div>
+          <div class="form-group">
+            <div class="label">
+              <label>年龄：</label>
+            </div>
+            <div class="field">
+              <input type="text" class="input w50" name="age" value="1"  data-validate="required:,number:年龄必须为1-120数字" />
+              <div class="tips"></div>
+            </div>
+          </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>院系：</label>
+                </div>
+                <div class="field">
+                    <select name="department" class="input w50" id="">
+                        <volist name="department" id="v">
+                            <option value="<{$v}>"><{$v}></option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+          <div class="form-group">
+            <div class="label">
+              <label></label>
+            </div>
+            <div class="field">
+              <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</block>

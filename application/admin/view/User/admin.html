@@ -1,0 +1,71 @@
+<extend name="Index/index" />
+
+<block name="include">
+    <script src="ADMIN_URL/js/pintuer.js"></script>
+</block>
+
+<block name="main">
+    
+    <div >
+        <table class="table table-hover text-center">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>用户名</th>
+                <th>头像</th>
+                <th>身份</th>
+                <th>院系</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>权限</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach  name='data' item='vo' key="k" >
+            <tr class="active">
+                <th scope="row"><{$k+1}></th>
+                <td><{$vo.username}></td>
+                <td><{$vo.icon}></td>
+                <td>
+                    <if condition="$vo.identity eq 1">
+                        <a href="#">学生</a>
+                        <else />   <a href="#" >老师</a>
+                    </if>
+                </td>
+                <td><{$vo.department}></td>
+                <td><{$vo.age}></td>
+                <td>
+                    <if condition="$vo.sex neq 0">
+                        <if condition="$vo.sex eq 1">
+                            <a href="#" id="sex-a">男</a>
+                            <else />   <a href="#" id="sex-a">女</a>
+                        </if>
+                        <else /> 未知
+                    </if>
+                </td>
+                <td>
+                    <switch name="vo.status" >
+                        <case value="0" break="0或1">黑名单</case>
+                        <case value="1">普通用户</case>
+                        <case value="2">管理员</case>
+                        <case value="3">超管</case>
+                        <default />默认情况
+                    </switch>
+                </td>
+                <td>
+                    <div class="button-group">
+                        <a href ="<{:url('User/EditUser',array('id'=>$vo['id']))}>" class="button border-main">
+                        <span class="icon-edit"></span> 编辑</a>  
+                        <!--<a href ="#" class="button border-red"> <span class="icon-trash-o"></span>删除</a>-->
+                    </div>
+                </td>
+            </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <{$page}>
+    </div>
+
+
+</block>

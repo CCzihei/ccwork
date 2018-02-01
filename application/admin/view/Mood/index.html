@@ -1,0 +1,40 @@
+<extend name="Index/index" />
+
+<block name="include">
+    <script src="ADMIN_URL/js/pintuer.js"></script>
+</block>
+
+<block name="main">
+    
+    <div >
+        <table class="table table-hover text-center">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>用户名</th>
+                <th>内容</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach  name='data' item='vo' key="k" >
+            <tr class="active">
+                <th scope="row"><{$k+1}></th>
+                <td><{$vo.username}></td>
+                <td><{$vo.content}></td>
+                <td><{$vo.createtime|date="Y/m/d H:i",###}></td>
+                <td>
+                    <div class="button-group">
+                        <a href ="<{:url('Comment/ShowComment',array('moodID'=>$vo['id'],'uid'=>$vo.['uid']))}>" class="button border-main">
+                        <span class="icon-edit"></span> 查看评论</a>
+                        <a href ="<{:url('Mood/DeleteMood',array('id'=>$vo['id']))}>" class="button border-red"> <span class="icon-trash-o"></span>删除</a>
+                    </div>
+                </td>
+            </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <{$page}>
+    </div>
+</block>

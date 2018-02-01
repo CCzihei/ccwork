@@ -1,0 +1,67 @@
+<extend name="admin@layout/login"/>
+<block name="body">
+    <div class="login-logo">
+        <a href="#"><img src="__ADMIN__/images/logo.png" alt=""/></a>
+    </div>
+    <h2 class="form-heading">后台登录</h2>
+    <div class="app-cam">
+        <form id="login-form" >
+            <input type="text" class="text" placeholder="登录名" name="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '登录名';}">
+            <input type="password"  name="password" placeholder="请输入密码" onfocus="this.value = '';">
+            <notempty name=":input('get.check_code')">
+            <div>
+                <input id="code" type="text" value="" name="code" placeholder="验证码" onfocus="this.value = '';" style="width: 60%;border: 1px solid #fff;">
+                <img src="<{:make_captcha('admin_login')}>" alt="验证码" style="width:38%;height: 50px;border-radius: 3px;float: right;" onclick="this.src=this.src+'?i='+Math.random()"/>
+            </div>
+            <else/>
+            <input type="hidden"  name="check_code" value="<{:input('get.check_code')}>">
+            </notempty>
+            <div class="submit"><input type="submit" value="登录"></div>
+        </form>
+    </div>
+    <div class="copy_layout login">
+    </div>
+   <script>
+   $(function(){
+        var form  = $("#login-form");
+        var username = form.children().eq(0);
+        var password = form.children().eq(1);
+        var code = $('#code');
+
+       $('.submit input[type=submit]').click(function () {
+           $.ajax({
+               data: form.serialize(),
+               url: "<{:url('login/dologin')}>",
+               type: 'post',
+               success: function (result) {
+                    if (result.code != 1) {
+                        alert(result.msg);
+                        return false;
+                    }
+                   window.location.href = "<{:url('admin/index/index')}>";
+               }
+           });
+       });
+
+        form.submit(function (){
+            return false;
+//            var resUserName = checkRule(username,/^[\u4E00-\u9FA5a-zA-Z0-9_]{3,20}$/);
+//            if(!resUserName){
+//              return false;
+//            }
+//            var resPassWord = checkRule(password,/^[a-zA-Z_1-9]\w{5,17}$/);
+//
+//            if(!resPassWord){
+//                alert('密码必须以字母开头，长度在6-18之间，只能包含字符、数字和下划线');
+//                return false;
+//            }
+//            var resCode = checkCode();
+//            if(!resCode){
+//                alert('验证码错误');
+//                return false;
+//            }
+        });
+    });
+
+   </script>
+</block>

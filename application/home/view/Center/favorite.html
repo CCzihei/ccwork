@@ -1,0 +1,28 @@
+<div class="">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">我的点赞</h3>
+        </div>
+        <style>
+            .comment{
+                margin: 0px;
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 10px;
+            }
+            .comment li{
+                padding-bottom: 2px;
+            }
+        </style>
+        <div class="panel-body">
+            <ul>
+                <empty name="favorite">
+                    <center>您还没有点赞！！</center>
+                    <else />
+                    <volist name="favorite" id="vo">
+                        <li><{$vo.username}>:<a href=""><{$vo.content}></a><div class="fr">时间：<{$vo.createtime|date="Y-m-d H:i",###}> &nbsp;&nbsp;<a href="<{:url('favorite/DeleteFavorite',array('id'=>$vo['id']))}>" class="btn btn-default">取消点赞</a></div></li>
+                    </volist>
+                </empty>
+            </ul>
+        </div>
+    </div>
+</div>

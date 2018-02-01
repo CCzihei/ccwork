@@ -1,0 +1,19 @@
+<div class="">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">我的动态</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <empty name="addfriend">
+                    <center>还没有申请添加您为好友的记录！！</center>
+                    <else />
+                    <volist name="addfriend" id="vo">
+                        <li><a href=""><{$vo.username}></a>申请添加您为好友！   <div class="fr">时间：<{$vo.createtime|date="Y-m-d H:i",###}> &nbsp;&nbsp;<a href="<{:url('Friend/AddFriend',array('id'=>$vo['id'],'fid'=>$vo['uid']))}>" class="btn btn-default">同意</a>&nbsp;&nbsp;<a href="<{:url('Friend/RefuseFriend',array('id'=>$vo['id']))}>" class="btn btn-default">拒绝</a></div></li>
+                    </volist>
+
+                </empty>
+            </ul>
+        </div>
+    </div>
+</div>

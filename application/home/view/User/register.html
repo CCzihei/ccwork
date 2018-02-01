@@ -1,0 +1,98 @@
+<extend name="Layout/layout" />
+<block name="include">
+    <style>
+        .body{
+            margin-top:100px ;
+        }
+        .body .register-form{
+
+            border:1px solid #c4c4c4;
+            border-radius: 3px;
+            padding: 60px 80px 40px 0px;
+        }
+    </style>
+
+</block>
+
+<block name="nav">
+
+</block>
+<block name="search"></block>
+<block name="body">
+    <div class="row body mt20">
+        <div class="col-sm-6 col-sm-offset-3">
+            <form class="form-horizontal register-form"  role="form" method="post" action="<{:U('User/doRegister')}>">
+                <div class="form-group">
+                    <label for="username" class="col-sm-3 control-label">用户名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label ">密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="repassword" class="col-sm-3 control-label ">确认密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" name="repassword" id="repassword" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-3 control-label ">性别</label>
+                    <div class="col-sm-9">
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" checked id="inlineRadio2" value="1"> 男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio3" value="2"> 女
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-3 control-label ">身份</label>
+                    <div class="col-sm-9">
+                        <label class="radio-inline">
+                            <input type="radio" name="identity"  checked value="1"> 学生
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="identity" value="2"> 老师
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-3 control-label ">年龄</label>
+                    <div class="col-sm-9" style="max-height: 40px">
+                        <select name="age" id="age" class="form-control" style="max-height: 40px;">
+                            <?php
+                                for($i = 0; $i<120;$i++){
+                                    echo '<option value='.$i.'>'.$i.'</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-3 control-label ">院系</label>
+                    <div class="col-sm-9" style="max-height: 40px">
+                        <select name="department"  class="form-control" style="max-height: 40px;">
+                            <volist name="department" id="v">
+                                <option value="<{$v}>"><{$v}></option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-success" style="width: 100%">注册</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="chat"></block>
+<block name="footer"></block>

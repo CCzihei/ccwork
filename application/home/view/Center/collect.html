@@ -1,0 +1,35 @@
+<div class="">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">我的收藏</h3>
+        </div>
+        <style>
+            .comment{
+                margin: 0px;
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 10px;
+            }
+            .comment li{
+                padding-bottom: 2px;
+            }
+        </style>
+        <div class="panel-body">
+            <ul>
+                <empty name="collect">
+                    <center>您还没有任何收藏！！</center>
+                    <else />
+                    <volist name="collect" id="vo">
+                        <li><{$vo.username}>:<a href=""><{$vo.content}></a><div class="fr">时间：<{$vo.createtime|date="Y-m-d H:i",###}> &nbsp;&nbsp;<a href="<{:url('Collect/DeleteCollect',array('id'=>$vo['id'],'url'=>$url))}>" class="btn btn-default">删除</a></div></li>
+                        <ul class="comment">
+                        <notempty name="vo.comment">
+                            <volist name="vo.comment" id="v">
+                                <li>&nbsp;&nbsp;<{$v.username}>:<{$v.content}></li>
+                            </volist>
+                        </notempty>
+                        </ul>
+                    </volist>
+                </empty>
+            </ul>
+        </div>
+    </div>
+</div>

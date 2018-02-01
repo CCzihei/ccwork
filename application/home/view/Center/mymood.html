@@ -1,0 +1,19 @@
+<div class="">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">我的动态</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <empty name="mood">
+                    <center>您还没有任何动态！！</center>
+                    <else />
+                    <volist name="mood" id="vo">
+                        <li><a href=""><{$vo.content}></a><div class="fr">时间：<{$vo.createtime|date="Y-m-d H:i",###}> &nbsp;&nbsp;<a href="<{:url('Mood/DeleteMood',array('id'=>$vo['id'],'url'=>$url))}>" class="btn btn-default">删除</a></div></li>
+                    </volist>
+
+                </empty>
+            </ul>
+        </div>
+    </div>
+</div>

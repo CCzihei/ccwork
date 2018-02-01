@@ -1,0 +1,108 @@
+<extend name="Layout/layout" />
+<block name="include">
+    <style>
+        .window{
+            border: 1px solid #696;padding: 10px 10px;text-align: center;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            -webkit-box-shadow: #666 0px 0px 10px;
+            -moz-box-shadow: #666 0px 0px 10px;
+            box-shadow: #666 0px 0px 10px;background: #EEFF99;
+        }
+        .msg{
+            display: block;
+            margin: 10px 20px 0px;
+            padding: 10px 20px;
+            background: #EEFF99;
+            border: 1px solid #fff;
+            border-radius: 3px;
+        }
+        .msg-left{
+            float: left;
+        }
+        .msg-right{
+            float: right;
+        }
+    </style>
+</block>
+
+<block name="search">
+
+</block>
+<block name="nav">
+
+</block>
+<block name="body">
+    <div class="row body mt20">
+        <div class="col-sm-8 col-sm-offset-2 window" style="background: #e0e0e0;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p><{$friend['username']}></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="content-show" style="overflow:auto;width: 100%;height:300px;background: #fff;margin: 10px 0px;padding: 0px 10px;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="form-horizontal" role="form" id="form-send">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="send-content" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-10 col-sm-2">
+                                <button class="btn btn-default" id="send">发送</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <block name="script">
+        <script>
+            var uid = <{$_SESSION['home']['userInfo']['id']}> ;
+            $('.uid').html(uid);
+            // 连接服务端
+            var socket = io('http://'+document.domain+':2120');
+            // 连接后登录
+            socket.on('connect', function(){
+                socket.emit('login', uid);
+            });
+            socket.on('new_msg', function(from,msg){
+                $('#content-show').append("<div><span class='msg-left msg'><{$friend['username']}>:"+msg+"</span><div class='clear'></div></div>");
+                $('#content-show').scrollTop($('#content-show')[0].scrollHeight);
+            });
+        </script>
+        <script>
+            $(function(){
+                $('#send').click(function(){
+                    $('#form-send').submit(function(){return false});
+                    if($('#send-content').val()==null || $('#send-content').val()==undefined || $('#send-content').val()==''){
+                        alert('您没有输入内容');
+                        return false;
+                    }
+                    msg = 'from:'+<{$_SESSION['home']['userInfo']['id']}>+',to:' +<{$_GET['fid']}>+ ',content:'+$('#send-content').val();
+                    res = socket.emit('send_msg',msg);
+                    $('#content-show').append("<div><span class='msg msg-right'>"+$('#send-content').val()+": <{$_SESSION['home']['userInfo']['username']}></span><div class='clear'></div></div>");
+                    $('#send-content').val('');
+                    $('#send-content').focus();
+                    $('#content-show').scrollTop($('#content-show')[0].scrollHeight);
+                });
+            });
+            $(window).bind('beforeunload',function(){return '您输入的内容尚未保存，确定离开此页面吗？';});
+        </script>
+    </block>
+
+    <block name="footer">
+
+    </block>
+</block>
