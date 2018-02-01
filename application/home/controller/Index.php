@@ -1,6 +1,6 @@
 <?php
 namespace app\home\Controller;
-use app\Common\Controller\Home;
+use app\Common\controller\Home;
 use app\common\Model\Sysinfo;
 use app\common\Model\Mood;
 use app\common\Model\Link;

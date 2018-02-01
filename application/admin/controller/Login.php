@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-use app\common\Controller\Admin;
+use app\common\controller\Admin;
 use think\Db;
 
 class Login extends Admin

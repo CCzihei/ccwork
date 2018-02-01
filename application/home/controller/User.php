@@ -1,6 +1,6 @@
 <?php
-namespace app\Home\Controller;
-use app\common\Controller\Home;
+namespace app\home\controller;
+use app\common\controller\Home;
 use Think\Controller;
 
 class User extends Home

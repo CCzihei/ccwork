@@ -1,5 +1,5 @@
 <?php
-namespace app\common\Controller;
+namespace app\common\controller;
 use think\Controller;
 
 class Home extends Controller

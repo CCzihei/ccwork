@@ -1,6 +1,6 @@
 <?php
 namespace Home\Controller;
-use app\common\Controller\Home;
+use app\common\controller\Home;
 use Think\Controller;
 
 class Chat extends Home
