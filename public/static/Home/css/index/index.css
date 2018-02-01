@@ -1,0 +1,72 @@
+.con-head{
+    height: 50px;
+    width: 100%;
+}
+.con-head .div-show{
+    background: #f5d0dc;
+    height: 50px;
+    width: 94.8%;
+    padding: 16px 10px;
+    position: absolute;
+    cursor:pointer;
+}
+.con-head .div-show .show-select{
+    display: none;
+    margin: 0;
+    font-size: 12px;
+    position: absolute;
+    left:0px;
+    top: 50px;
+    background: #FFF;
+    padding: 10px ;
+    cursor:pointer;
+    border: 1px solid #f5d0dc;
+}
+.con-head .div-show .show-select li{
+    padding-bottom: 5px;
+}
+.dongtai{
+    border: 1px solid #f5d0dc;
+    border-radius:3px ;
+    margin-bottom:20px ;
+}
+.dongtai .con-info{
+    border-bottom:1px solid #f5d0dc ;
+}
+.dongtai .icon{
+    width: 38px;
+}
+.con-info{
+    padding-top:10px ;
+}
+.con-info .info-right{
+    padding: 5px;
+    font-size: 12px;
+}
+.con-info .info-right p{
+    margin: 0px;
+}
+.con-info .info-right p.name{
+    font-size: 14px;
+    margin: 0px;
+}
+.dongtai .dongtai-con{
+    padding: 20px 10px;
+}
+.dongtai .dongtai-footer{
+    padding: 10px;
+    background: #f5d0dc;
+}
+.dongtai .dongtai-footer .caozuo  a{
+    padding: 3px 5px ;
+    border: 1px solid #f5d0dc;
+    color: #c35673;
+    font-size: 13px;
+    border-radius: 3px;
+}
+.dongtai .dongtai-footer .caozuo  a:hover{
+    color: #c35673;
+    text-decoration: none;
+    height: 25px;
+    background: #fff;
+}

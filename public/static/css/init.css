@@ -1,0 +1,11 @@
+*{margin:0px;padding:0px;font-family: "Microsoft YaHei", Verdana, sans-serif, "SimSun";}
+img{border:0px;}
+a{text-decoration:none;color:#999;}
+a:hover{color:#de8c68;cursor:pointer;}
+body,h1,h2,h3,h4,h5,h6{color:#999;}
+body{font:12px/1.5 tahoma,arial;}
+ul li{list-style:none;}
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both;}
+.mt20{margin-top: 20px;}
