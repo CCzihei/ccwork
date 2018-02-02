@@ -64,4 +64,19 @@ class Admin extends Controller
 
 		session('admin.admin_info', $admin_info);
 	}
+
+	/**
+	 * 获取菜单列表
+	 */
+	private function fetchMenuList()
+	{
+		$menu = [
+			'user' => [
+				'child' => [
+					'user_list' => [ 'route' => '',
+					]
+				]
+			],
+		];
+	}
 }

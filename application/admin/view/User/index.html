@@ -1,11 +1,5 @@
-<extend name="Index/index" />
-
-<block name="include">
-    <script src="ADMIN_URL/js/pintuer.js"></script>
-</block>
-
+<extend name="admin@Layout/admin" />
 <block name="main">
-    
     <div >
         <table class="table table-hover text-center">
             <thead>
@@ -22,10 +16,10 @@
             </tr>
             </thead>
             <tbody>
-            <foreach  name='data' item='vo' key="k" >
+            <foreach  name='user_list' item='vo' key="k" >
             <tr class="active">
                 <th scope="row"><{$k+1}></th>
-                <td><{$vo.username}></td>
+                <td><{$vo.name}></td>
                 <td><{$vo.icon}></td>
                 <td>
                     <if condition="$vo.identity eq 1">
@@ -55,12 +49,12 @@
                 </td>
                 <td>
                     <div class="button-group">
-                        <a href ="<{:url('User/EditUser',array('id'=>$vo['id']))}>" class="button border-main">
+                        <a href ="<{:url('User/EditUser',array('user_id'=>$vo['user_id']))}>" class="button border-main">
                         <span class="icon-edit"></span> 编辑</a>
                         <if condition="$vo.status eq 0">
-                            <a href ="<{:url('User/ChangeStatus',array('id'=>$vo['id'],'status'=>$vo['status']))}>" class="button border-red"> <span class="icon-trash-o"></span>解除黑名单</a>
+                            <a href ="<{:url('User/ChangeStatus',array('user_id'=>$vo['user_id'],'status'=>$vo['status']))}>" class="button border-red"> <span class="icon-trash-o"></span>解除黑名单</a>
                         <else/>
-                            <a href ="<{:url('User/ChangeStatus',array('id'=>$vo['id'],'status'=>$vo['status']))}>" class="button border-red"> <span class="icon-trash-o"></span>添加黑名单</a>
+                            <a href ="<{:url('User/ChangeStatus',array('user_id'=>$vo['user_id'],'status'=>$vo['status']))}>" class="button border-red"> <span class="icon-trash-o"></span>添加黑名单</a>
                         </if>
                     </div>
                 </td>
@@ -68,8 +62,5 @@
             </foreach>
             </tbody>
         </table>
-        <{$page}>
     </div>
-
-
 </block>

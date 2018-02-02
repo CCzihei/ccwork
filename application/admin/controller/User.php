@@ -1,25 +1,20 @@
 <?php
-namespace Admin\Controller;
+namespace app\admin\controller;
+
+use app\common\controller\Admin;
 
 class User extends Admin {
-    private $user = null;
-    public function _initialize(){
-        $this->user = D('User',"Service");
-        $this->islogin();
-    }
-    public function index(){
-        $p = I('get.p',1);
-        $user= D('User','Service');
-        $params['page'] = $p;
-        $params['step'] = 10;
-        $dataArr=$user->GetUserList($params);
-        $page = $dataArr['page'];
-        $data = $dataArr['data'];
 
-        $this->assign('page',$page);// 赋值分页输出
-    	$this->assign('title','用户管理');
-        $this->assign('data',$data);
-    	$this->display();
+    public function index(){
+        $page = input('get.page/i');
+        $params['page'] = $page;
+        $params['step'] = 10;
+        $user_list= service('User')->getUserList($params);
+
+        $this->assign('page', $page);// 赋值分页输出
+    	$this->assign('title', '用户管理');
+        $this->assign('user_list', $user_list);
+    	return $this->fetch();
     }
 
     public function admin(){

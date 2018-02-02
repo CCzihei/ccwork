@@ -7,10 +7,7 @@ class Login extends Admin
 {
 	public function _initialize ()
 	{
-		$admin = session('admin.admin_info');
-		if (!empty($admin)) {
-			$this->redirect(url('admin/index/index'));
-		}
+
 	}
 
 	/**
@@ -18,6 +15,7 @@ class Login extends Admin
 	 */
 	public function login()
 	{
+		$this->checkLogin();
 		$this->assign('check_code', !empty(input('get.check_code') ? input('get.check_code') : 0));
 		$this->assign('title', '后台登录');
 		return $this->fetch();
@@ -28,6 +26,7 @@ class Login extends Admin
 	 */
 	public function doLogin()
 	{
+		$this->checkLogin();
 		if (request()->isPost()) {
 			$username = input('post.username');
 			$password = input('post.password');
@@ -48,37 +47,27 @@ class Login extends Admin
 			if(check_password($password, $admin['password'])){
 				$this->setAdmin($admin);
 				$this->result(null, 1);
-				return $this->redirect(url('admin/index/index'));
 			}else{
-				$this->result(null, 1, '账号不存在或密码不正确!');
+				$this->result(null, 0, '账号不存在或密码不正确!');
 			}
+		}
+	}
+
+	/**
+	 * 检查登录
+	 */
+	public function checkLogin()
+	{
+		$admin = session('admin.admin_info');
+		if (!empty($admin)) {
+			$this->redirect(url('admin/index/index'));
 		}
 	}
 
 	public function loginOut()
 	{
-		session('admin_info',null);
-		$this->success('退出成功');
-
-	}
-	/**
-	 * 验证码
-	 * @return [source]
-	 */
-	public function code()
-	{
-
+		session('admin.admin_info',null);
+		$this->redirect(url('admin/login/login'));
 	}
 
-	//检查验证码
-	public function checkCode()
-	{
-		$code = I('get.code');
-		$Verify = new Verify();
-		if(!$Verify->check($code)){
-			$this->ajaxReturn(0);
-		}else{
-			$this->ajaxReturn(1);
-		}
-	}
 }

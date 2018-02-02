@@ -1,5 +1,5 @@
 <extend name="admin@layout/login"/>
-<block name="body">
+<block name="main">
     <div class="login-logo">
         <a href="#"><img src="__ADMIN__/images/logo.png" alt=""/></a>
     </div>
@@ -8,14 +8,11 @@
         <form id="login-form" >
             <input type="text" class="text" placeholder="登录名" name="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '登录名';}">
             <input type="password"  name="password" placeholder="请输入密码" onfocus="this.value = '';">
-            <notempty name=":input('get.check_code')">
-            <div>
+            <div class="M_showCode" <empty name=":input('get.check_code')"> style="display:none" </empty> >
                 <input id="code" type="text" value="" name="code" placeholder="验证码" onfocus="this.value = '';" style="width: 60%;border: 1px solid #fff;">
                 <img src="<{:make_captcha('admin_login')}>" alt="验证码" style="width:38%;height: 50px;border-radius: 3px;float: right;" onclick="this.src=this.src+'?i='+Math.random()"/>
             </div>
-            <else/>
             <input type="hidden"  name="check_code" value="<{:input('get.check_code')}>">
-            </notempty>
             <div class="submit"><input type="submit" value="登录"></div>
         </form>
     </div>
@@ -24,9 +21,6 @@
    <script>
    $(function(){
         var form  = $("#login-form");
-        var username = form.children().eq(0);
-        var password = form.children().eq(1);
-        var code = $('#code');
 
        $('.submit input[type=submit]').click(function () {
            $.ajax({
@@ -36,6 +30,12 @@
                success: function (result) {
                     if (result.code != 1) {
                         alert(result.msg);
+                        $('.M_showCode').show();
+                        var check_code = $('input[name=check_code]').val();
+                        if (!check_code) {
+                            check_code.val(1);
+                        }
+                        $('.M_showCode img').click();
                         return false;
                     }
                    window.location.href = "<{:url('admin/index/index')}>";

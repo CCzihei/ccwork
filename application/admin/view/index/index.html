@@ -2,54 +2,8 @@
 <block name="css">
     {__BLOCK__}
 </block>
-<block name="body">
+<block name="main">
 
-<div class="header bg-main">
-  <div class="logo margin-big-left fadein-top">
-    <h1><img src="<{UPLOAD_PATH . :session('logo')}>" class="radius-circle rotate-hover" height="50" width="50" alt="" /><{$Think.session.sysname}>后台管理中心</h1>
-  </div>
-  <div class="head-l"><a class="button button-little bg-green" href="<{:url('home/index/index')}>" target="_blank"><span class="icon-home"></span> 前台首页</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="<{:url('Login/LoginOut')}>"><span class="icon-power-off"></span> 退出登录</a> </div>
-</div>
-<div class="leftnav" style="height: 565px;overflow: auto;">
-  <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
-  <h2><span class="icon-pencil-square-o"></span>用户管理</h2>
-  <ul>
-    <li><a href="<{:url('User/index')}>" target="right"><span class="icon-caret-right"></span>全部用户</a></li>
-      <li><a href="<{:url('User/admin')}>" target="right"><span class="icon-caret-right"></span>管理员</a></li>
-    <li><a href="<{:url('User/addUser')}>" target="right"><span class="icon-caret-right"></span>添加用户</a></li>
-  </ul>
-    <h2><span class="icon-pencil-square-o"></span>动态管理</h2>
-    <ul>
-        <li><a href="<{:url('Mood/index')}>" target="right"><span class="icon-caret-right"></span>全部动态</a></li>
-        <!--<li><a href="<{:url('Mood/AddMood')}>" target="right"><span class="icon-caret-right"></span>添加用户</a></li>-->
-    </ul>
-    <h2><span class="icon-pencil-square-o"></span>评论管理</h2>
-    <ul>
-        <li><a href="<{:url('Comment/index')}>" target="right"><span class="icon-caret-right"></span>全部评论</a></li>
-        <!--<li><a href="<{:url('Mood/AddMood')}>" target="right"><span class="icon-caret-right"></span>添加用户</a></li>-->
-    </ul>
-    <h2><span class="icon-pencil-square-o"></span>点赞管理</h2>
-    <ul>
-        <li><a href="<{:url('Favorite/index')}>" target="right"><span class="icon-caret-right"></span>点赞列表</a></li>
-        <!--<li><a href="<{:url('Mood/AddMood')}>" target="right"><span class="icon-caret-right"></span>添加用户</a></li>-->
-    </ul>
-    <h2><span class="icon-pencil-square-o"></span>收藏管理</h2>
-    <ul>
-        <li><a href="<{:url('Collect/index')}>" target="right"><span class="icon-caret-right"></span>收藏列表</a></li>
-        <!--<li><a href="<{:url('Mood/AddMood')}>" target="right"><span class="icon-caret-right"></span>添加用户</a></li>-->
-    </ul>
-    <h2><span class="icon-pencil-square-o"></span>网站管理</h2>
-    <ul>
-        <li><a href="<{:url('User/SetPass')}>" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
-        <li><a href="<{:url('Link/index')}>" target="right"><span class="icon-caret-right"></span>友情链接</a></li>
-        <li><a href="<{:url('Link/AddLink')}>" target="right"><span class="icon-caret-right"></span>添加友情链接</a></li>
-    </ul>
-    <h2><span class="icon-pencil-square-o"></span>网站信息</h2>
-    <ul>
-        <li><a href="<{:url('Sysinfo/Logo')}>" target="right"><span class="icon-caret-right"></span>网站LOGO</a></li>
-        <li><a href="<{:url('Sysinfo/EditName')}>" target="right"><span class="icon-caret-right"></span>网站名称</a></li>
-    </ul>
-</div>
 <script type="text/javascript">
 $(function(){
   $(".leftnav h2").click(function(){
