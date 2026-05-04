@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: vchat-nginx
+    ports:
+      - "8088:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./public:/var/www/html/public:ro
+      - ./storage:/var/www/html/storage
+    depends_on:
+      - php
+    networks:
+      - vchat-network
+    restart: unless-stopped
+
+  php:
+    image: php:8.2-fpm-alpine
+    container_name: vchat-php
+    volumes:
+      - .:/var/www/html
+      - ./storage:/var/www/html/storage
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_DATABASE=ccwork
+      - DB_USERNAME=ccwork
+      - DB_PASSWORD=DN3hri6rHzSnLR3P
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - vchat-network
+    restart: unless-stopped
+
+networks:
+  vchat-network:
+    driver: bridge
